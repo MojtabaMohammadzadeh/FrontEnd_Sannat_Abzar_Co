@@ -31,7 +31,7 @@ export default defineComponent({
 
 .search > div:after {
   content: "";
-  background: white;
+  background: rgb(1, 2, 39);
   width: 5px;
   height: 15px;
   position: absolute;
@@ -41,20 +41,20 @@ export default defineComponent({
 }
 
 .search > div > input {
-  color: white;
+  color: rgb(1, 2, 39);
   font-size: 16px;
   background: transparent;
   width: 25px;
   height: 25px;
   padding: 10px;
-  border: solid 3px white;
+  border: solid 3px rgb(1, 2, 39);
   outline: none;
   border-radius: 35px;
   transition: width 0.5s;
 }
 
 .search > div > input::placeholder {
-  color: #efefef;
+  color: rgb(1, 2, 39);
   opacity: 0;
   transition: opacity 150ms ease-out;
 }

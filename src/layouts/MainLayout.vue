@@ -1,8 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <!-- **********************New Tolbar************* -->
-      <q-toolbar class="bg-purple text-white shadow-2 rounded-borders">
+      <q-toolbar class="topToolbar">
         <q-btn
           flat
           dense
@@ -11,116 +10,117 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-btn flat label="ورود/ثبت نام" @click="prompt = true" />
-        <q-dialog v-model="prompt" persistent>
-          <q-card style="min-width: 60vw">
-            <q-card-actions align="right" class="text-primary">
-              <!-- <q-btn icon="Cancle" flat v-close-popup /> -->
-              <q-icon
-                name="close"
-                v-close-popup
-                size="2em"
-                color="black"
-                style="cursor: pointer"
-              />
-              <!-- <q-btn flat label="Add address" v-close-popup /> -->
-            </q-card-actions>
-            <!-- <q-card-section> -->
 
-            <!-- <div class="text-h6">Your address</div> -->
-            <!-- </q-card-section> -->
-            <loginUser></loginUser>
-            <!-- <q-card-section class="q-pt-none">
-              <q-input
-                dense
-                v-model="address"
-                autofocus
-                @keyup.enter="prompt = false"
-              />
-            </q-card-section> -->
+        <!-- ****************************Login Start******************************************* -->
+        <q-btn class="loginBtn" label="ورود" @click="prompt = true" />
+
+        <!-- *******************************Modal Start *********************************** -->
+        <q-dialog v-model="prompt" persistent>
+          <q-card class="modalCard">
+            <div>
+              <q-icon id="closeIcon" name="close" v-close-popup />
+            </div>
+            <div>
+              <loginUser></loginUser>
+            </div>
           </q-card>
         </q-dialog>
+        <!-- **************************************End Modal ************************* -->
+
         <q-space />
 
-        <!--
-        notice shrink property since we are placing it
-        as child of QToolbar
-      -->
-        <q-tabs v-model="tab" shrink>
-          <router-link class="navBar" to="/categories"
-            ><q-tab name="tab2" label="دسته بندی ها"
-          /></router-link>
-          <router-link to="/home"
-            ><q-tab class="navBar" name="tab3" label="صفحه اصلی"
-          /></router-link>
+        <q-tabs v-model="tab" class="text-teal navBarContainer">
+          <q-tab>
+            <router-link class="navBar" to="/home">فروشگاه</router-link></q-tab
+          >
+          <q-tab
+            ><router-link class="navBar" to="/categories"
+              >دسته بندی
+            </router-link></q-tab
+          >
+          <q-tab>
+            <router-link class="navBar" to="/home"
+              >صفحه اصلی</router-link
+            ></q-tab
+          >
         </q-tabs>
       </q-toolbar>
 
       <!-- **********Search box********************* -->
-      <q-toolbar>
-        <q-btn class="storeBtn" color="deep-orange" glossy label="فروشگاه" />
+      <div>
         <searchBar class="searchBar" />
-      </q-toolbar>
+      </div>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> ابزار صنعت</q-item-label>
+    <q-drawer class="bg-grey-2" v-model="leftDrawerOpen" show-if-above bordered>
+      <q-list class="qList">
+        <q-item-label class="logoContainer" header
+          ><img class="abzarLogo" src="../assets/Abzar-Sanat.png" alt=""
+        /></q-item-label>
 
         <ul class="navbarList">
           <li>
             <router-link to="/profile" class="myRouter"
-              ><span class="material-icons"><q-icon name="engineering" /></span
-              >پروفایل کاربری</router-link
-            >
+              ><span class="material-icons"
+                ><q-icon name="engineering" size="2em" /></span
+              ><span class="drawerText">پروفایل کاربری</span>
+            </router-link>
           </li>
           <li>
             <router-link to="/messages" class="myRouter"
-              ><span class="material-icons"><q-icon name="email" /></span>پیام
-              ها</router-link
+              ><span class="material-icons"
+                ><q-icon name="email" size="2em" /></span
+              ><span class="drawerText">پیام ها</span></router-link
             >
           </li>
           <li>
             <router-link to="/contactUs" class="myRouter"
-              ><span class="material-icons"><q-icon name="call" /></span> تماس
-              با ما</router-link
-            >
+              ><span class="material-icons"
+                ><q-icon name="call" size="2em" /></span
+              ><span class="drawerText">تماس با ما</span>
+            </router-link>
           </li>
           <li>
             <router-link to="/orderList" class="myRouter"
-              ><span class="material-icons"><q-icon name="list_alt" /></span
-              >لیست سفارش ها</router-link
+              ><span class="material-icons"
+                ><q-icon name="list_alt" size="2em" /></span
+              ><span class="drawerText">لیست سفارش ها</span></router-link
             >
           </li>
           <li>
             <router-link to="/aboutUs" class="myRouter"
-              ><span class="material-icons"><q-icon name="people_alt" /></span
-              >درباره ما</router-link
+              ><span class="material-icons"
+                ><q-icon name="people_alt" size="2em" /></span
+              ><span class="drawerText">درباره ما</span></router-link
             >
           </li>
           <li>
             <router-link to="/favorites" class="myRouter"
               ><span class="material-icons"
-                ><q-icon size="2em" name="favorite"
-              /></span>
-              علاقه مندی ها</router-link
-            >
+                ><q-icon size="2em" name="favorite" /></span
+              ><span class="drawerText">علاقه مندی ها</span>
+            </router-link>
           </li>
           <li>
             <router-link to="/importingCo" class="myRouter"
-              ><span class="material-icons"><q-icon name="lan" /></span>لیست
-              فروشگاه ها و شرکت های وارد کننده</router-link
-            >
+              ><span class="material-icons"
+                ><q-icon name="lan" size="2em" /></span
+              ><span class="drawerText">فروشگاه ها و شرکت های وارد کننده</span>
+            </router-link>
           </li>
           <li>
             <router-link to="/changecity" class="myRouter"
               ><span class="material-icons"
-                ><q-icon name="edit_location_alt" /></span
-              >تغییر شهر</router-link
+                ><q-icon name="edit_location_alt" size="2em" /></span
+              ><span class="drawerText">تغییر شهر</span></router-link
             >
           </li>
           <li>
-            <span class="material-icons"><q-icon name="logout" /></span> خروج
+            <div class="exitBtn">
+              <span class="material-icons"
+                ><q-icon name="logout" size="2em" /></span
+              ><span class="drawerText">خروج</span>
+            </div>
           </li>
         </ul>
       </q-list>
@@ -160,38 +160,178 @@ export default defineComponent({
 </script>
 
 <style scoped>
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+.modalCard {
+  min-width: 40%;
+  min-height: 60%;
+  display: grid;
+  grid-template-rows: 10% 90%;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  background: rgba(182, 178, 233, 0.44);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(182, 178, 233, 0.78);
+}
+
+#closeIcon {
+  position: absolute;
+  right: 5%;
+  top: 0% !important;
+  cursor: pointer;
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.8);
+
+  border-radius: 50%;
+}
+#closeIcon:hover {
+  background-color: rgba(0, 0, 0, 0.24);
+  transition: transform 0.25s ease-out;
+}
+.topToolbar {
+  background-color: #e0e0e0;
+  color: #01060e;
+  box-shadow: rgba(0, 0, 0, 0.24) 5px 8px 15px;
+}
+
+.loginBtn {
+  font-family: "Dirooz";
+  min-width: 10%;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #f0f0f0, #cacaca);
+  box-shadow: 5px -5px 10px #bababa, -5px 5px 10px #ffffff;
+}
+.loginBtn:hover {
+  background: linear-gradient(45deg, #cacaca, #f0f0f0);
+  box-shadow: inset -5px 5px 10px #bababa, inset 5px -5px 10px #ffffff;
+}
+
 q-icon {
   font-family: Arial, Helvetica, sans-serif;
 }
 .myRouter {
-  color: black;
+  color: #041836;
   text-decoration: none;
   font-size: 1em;
   font-family: "Dirooz";
+  display: grid;
+  grid-template-columns: 20% 80%;
+
+  margin-left: 1em;
+}
+
+.myRouter:hover {
+  color: #e0e0e0;
+  background-color: #041836;
+}
+ul {
+  margin-top: 2em;
 }
 
 li {
   list-style: none;
-  margin-bottom: 1.5em;
+  position: relative;
+  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
 }
 
-.storeBtn {
+li:after {
+  content: "";
   position: absolute;
-  left: 1em;
-  font-family: "Dirooz";
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
 }
+li:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+li:hover {
+  background-color: #afaee6;
+  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
+
+  transition: transform 0.25s ease-out;
+}
+
 .searchBar {
   position: absolute;
   right: 1em;
+  margin-top: 1em;
+}
+
+.navBarContainer {
+  margin-right: 2em;
 }
 
 .navBar {
-  text-decoration: none;
-  color: aliceblue;
+  text-decoration-line: none;
+  text-decoration-color: none;
+  text-decoration-style: none;
   font-family: "Dirooz";
+  margin-right: 1em;
+  margin-left: 1em;
 }
 
-q-btn {
+@media screen and (max-width: 480px) {
+  .navBarContainer {
+    margin-right: 0.5em;
+  }
+  .navBar {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+  }
+}
+
+.abzarLogo {
+  width: 6em;
+  height: auto;
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+.exitBtn {
   font-family: "Dirooz";
+
+  display: grid;
+  grid-template-columns: 20% 80%;
+  cursor: pointer;
+
+  padding-left: 35%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  margin-top: 20%;
+  background: linear-gradient(315deg, #adb7cc, #f4f4f5);
+  box-shadow: 9px 9px 18px #bababa, -9px -9px 18px #ffffff;
+}
+.exitBtn:hover {
+  background: #e0e0e0;
+  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
+}
+
+.material-icons {
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+.drawerText {
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
 </style>

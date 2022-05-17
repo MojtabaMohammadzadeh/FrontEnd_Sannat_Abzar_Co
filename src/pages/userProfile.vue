@@ -1,7 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
-    <div><h1>پروفایل کاربری</h1></div>
-  </q-page>
+  <div></div>
 </template>
 
 <script>
@@ -11,3 +9,5 @@ export default defineComponent({
   name: "userProfile",
 });
 </script>
+
+<style scoped></style>
