@@ -52,7 +52,7 @@
       </div>
     </q-header>
 
-    <q-drawer class="bg-grey-2" v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer class="bg-blue-1" v-model="leftDrawerOpen" show-if-above bordered>
       <q-list class="qList">
         <q-item-label class="logoContainer" header
           ><img class="abzarLogo" src="../assets/Abzar-Sanat.png" alt=""
@@ -83,8 +83,15 @@
           <li>
             <router-link to="/orderList" class="myRouter"
               ><span class="material-icons"
-                ><q-icon name="list_alt" size="2em" /></span
+                ><q-icon name="shopping_bag" size="2em" /></span
               ><span class="drawerText">لیست سفارش ها</span></router-link
+            >
+          </li>
+          <li>
+            <router-link to="/shopingCart" class="myRouter"
+              ><span class="material-icons"
+                ><q-icon name="shopping_cart" size="2em" /></span
+              ><span class="drawerText">سبد خرید</span></router-link
             >
           </li>
           <li>
@@ -105,7 +112,7 @@
             <router-link to="/importingCo" class="myRouter"
               ><span class="material-icons"
                 ><q-icon name="lan" size="2em" /></span
-              ><span class="drawerText">فروشگاه ها و شرکت های وارد کننده</span>
+              ><span class="drawerText">ثبت فروشگاه و شرکت ها</span>
             </router-link>
           </li>
           <li>
@@ -199,24 +206,24 @@ export default defineComponent({
   transition: transform 0.25s ease-out;
 }
 .topToolbar {
-  background-color: #e0e0e0;
+  background-color: #e3f2fd;
   color: #01060e;
   box-shadow: rgba(0, 0, 0, 0.24) 5px 8px 15px;
 }
 
 .loginBtn {
   font-family: "Dirooz";
+  color: #cccdeb;
   min-width: 10%;
   margin-left: 1em;
   padding-left: 1em;
   padding-right: 1em;
   border-radius: 5px;
-  background: linear-gradient(45deg, #f0f0f0, #cacaca);
-  box-shadow: 5px -5px 10px #bababa, -5px 5px 10px #ffffff;
+  background: linear-gradient(45deg, #4b5096, #a1a3c9);
+  box-shadow: 5px -5px 10px #bababa, -5px 5px 10px #e6f0f8;
 }
 .loginBtn:hover {
-  background: linear-gradient(45deg, #cacaca, #f0f0f0);
-  box-shadow: inset -5px 5px 10px #bababa, inset 5px -5px 10px #ffffff;
+  background: linear-gradient(60deg, #7479bd, #cccdeb);
 }
 
 q-icon {
@@ -244,7 +251,7 @@ ul {
 li {
   list-style: none;
   position: relative;
-  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
+  /* box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff; */
 }
 
 li:after {

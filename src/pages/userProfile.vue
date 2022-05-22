@@ -1,13 +1,202 @@
 <template>
-  <div></div>
+  <div class="userProfileContainer">
+    <div class="headerWave">
+      <svg
+        width="100%"
+        height="100%"
+        id="svg"
+        viewBox="0 0 1440 500"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition duration-300 ease-in-out delay-150"
+      >
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="5%" stop-color="#002bdcff"></stop>
+            <stop offset="95%" stop-color="#32ded4ff"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          d="M 0,500 C 0,500 0,250 0,250 C 88.78571428571428,212.89285714285714 177.57142857142856,175.78571428571428 295,199 C 412.42857142857144,222.21428571428572 558.5,305.75 703,306 C 847.5,306.25 990.4285714285716,223.2142857142857 1113,200 C 1235.5714285714284,176.7857142857143 1337.7857142857142,213.39285714285717 1440,250 C 1440,250 1440,500 1440,500 Z"
+          stroke="none"
+          stroke-width="0"
+          fill="url(#gradient)"
+          class="transition-all duration-300 ease-in-out delay-150 path-0"
+          transform="rotate(-180 720 250)"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- *******************************END SVG ************************** -->
+    <div class="picContainer">
+      <img
+        class="profilePic"
+        src="../assets/avatar-80d87a28af8cbd8218c96bf93e7c4579.jpg"
+        alt=""
+      />
+      <q-icon id="profilePicIcon" name="photo_camera" />
+    </div>
+    <!-- ********************************INPUT ***************************** -->
+    <div dir="rtl" class="form">
+      <h5>نام</h5>
+      <h5>نام خانوادگی</h5>
+      <h5>کد معرف</h5>
+      <q-btn color="secondary" label="تغییر مشخصات" @click="prompt = true" />
+    </div>
+
+    <!-- *********************************MOdal***************************** -->
+    <q-dialog v-model="prompt" persistent>
+      <q-card class="modalCard">
+        <div>
+          <q-icon id="closeIcon" name="close" v-close-popup />
+        </div>
+        <div dir="rtl" class="modalForm">
+          <input type="text" placeholder="نام" />
+          <input type="text" placeholder="نام خانوادگی" />
+          <q-btn class="modalBtn" color="secondary" label="ثبت تغییرات" />
+        </div>
+      </q-card>
+    </q-dialog>
+
+    <!-- *************************END MODAL************************ -->
+  </div>
 </template>
 
 <script>
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "userProfile",
+  setup() {
+    return {
+      prompt: ref(false),
+    };
+  },
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.userProfileContainer {
+  position: relative;
+  margin: 0%;
+  padding: 0%;
+}
+
+.headerWave {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+}
+
+//******************PIC************
+.picContainer {
+  position: absolute;
+  top: 12em;
+  right: 4em;
+  width: 15%;
+  border-radius: 20px;
+  background-color: brown;
+  box-shadow: 1px 12px 12px 5px rgba(0, 0, 0, 0.4);
+
+  @media screen and (max-width: 760px) {
+    top: 5em;
+    right: 10em;
+    width: 25%;
+  }
+}
+.profilePic {
+  border-radius: 50%;
+  width: 90%;
+  margin: 5%;
+
+  @media screen and (max-width: 760px) {
+    width: 90%;
+  }
+}
+#profilePicIcon {
+  cursor: pointer;
+  font-size: 3em;
+  position: absolute;
+  bottom: 0.25em;
+  left: 0.25em;
+  @media screen and (max-width: 760px) {
+    bottom: 0.25em;
+    left: 0em;
+    font-size: 2em;
+  }
+}
+#profilePicIcon:hover {
+  color: blue;
+  transition: 100ms ease-in-out;
+}
+.form {
+  width: 70%;
+  position: absolute;
+  top: 22em;
+  left: 6em;
+
+  font-family: "Dirooz";
+
+  @media screen and (max-width: 760px) {
+    top: 15em;
+    left: 0em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  h5 {
+    margin: 1em;
+  }
+}
+.modalCard {
+  min-width: 40%;
+  min-height: 60%;
+  font-family: "Dirooz";
+  background: rgba(182, 178, 233, 0.44);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(182, 178, 233, 0.78);
+
+  @media screen and (max-width: 760px) {
+    min-width: 90%;
+    min-height: 40%;
+  }
+}
+
+#closeIcon {
+  position: absolute;
+  right: 5%;
+  top: 5% !important;
+  cursor: pointer;
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.8);
+
+  border-radius: 50%;
+}
+.modalForm {
+  position: absolute;
+  top: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  input {
+    margin: 1em;
+    width: 70%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 12px 12px 1px rgba(0, 0, 0, 0.2);
+  }
+  .modalBtn {
+    margin-top: 2em;
+  }
+}
+</style>

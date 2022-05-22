@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <div><h1>علاقخ مندی ها</h1></div>
+    <div><h1>علاقه مندی ها</h1></div>
   </q-page>
 </template>
 

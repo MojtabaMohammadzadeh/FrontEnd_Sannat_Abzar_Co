@@ -41,6 +41,10 @@ const routes = [
         path: "/changeCity",
         component: () => import("src/pages/changeCity.vue"),
       },
+      {
+        path: "/shopingCart",
+        component: () => import("src/pages/ShopingCart.vue"),
+      },
     ],
   },
 
