@@ -42,4 +42,4 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quas
 
 
 
-![ScreenShot](screencapture-localhost-8080-2022-05-24-09_25_55.png)
+![ScreenShot](/screencapture-localhost-8080-2022-05-24-09_25_55.png)
