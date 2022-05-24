@@ -1,6 +1,6 @@
 <template>
   <div class="userProfileContainer">
-    <div class="headerWave">
+    <!-- <div class="headerWave">
       <svg
         width="100%"
         height="100%"
@@ -24,7 +24,7 @@
           transform="rotate(-180 720 250)"
         ></path>
       </svg>
-    </div>
+    </div> -->
 
     <!-- *******************************END SVG ************************** -->
     <div class="picContainer">
@@ -40,7 +40,11 @@
       <h5>نام</h5>
       <h5>نام خانوادگی</h5>
       <h5>کد معرف</h5>
-      <q-btn color="secondary" label="تغییر مشخصات" @click="prompt = true" />
+      <q-btn color="dark" label="تغییر مشخصات" @click="prompt = true" />
+    </div>
+
+    <div class="imgContainer">
+      <img src="../assets/pic03.png" alt="" />
     </div>
 
     <!-- *********************************MOdal***************************** -->
@@ -52,7 +56,7 @@
         <div dir="rtl" class="modalForm">
           <input type="text" placeholder="نام" />
           <input type="text" placeholder="نام خانوادگی" />
-          <q-btn class="modalBtn" color="secondary" label="ثبت تغییرات" />
+          <q-btn class="modalBtn" color="dark" label="ثبت تغییرات" />
         </div>
       </q-card>
     </q-dialog>
@@ -90,11 +94,11 @@ export default defineComponent({
 //******************PIC************
 .picContainer {
   position: absolute;
-  top: 12em;
+  top: 2em;
   right: 4em;
   width: 15%;
   border-radius: 20px;
-  background-color: brown;
+  background-color: #f5f5f5;
   box-shadow: 1px 12px 12px 5px rgba(0, 0, 0, 0.4);
 
   @media screen and (max-width: 760px) {
@@ -131,7 +135,7 @@ export default defineComponent({
 .form {
   width: 70%;
   position: absolute;
-  top: 22em;
+  top: 15em;
   left: 6em;
 
   font-family: "Dirooz";
@@ -197,6 +201,19 @@ export default defineComponent({
   }
   .modalBtn {
     margin-top: 2em;
+  }
+}
+.imgContainer {
+  position: absolute;
+  left: 3em;
+  top: 1em;
+
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
+  img {
+    width: auto;
+    height: 70vh;
   }
 }
 </style>

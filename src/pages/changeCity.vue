@@ -31,7 +31,7 @@
       </template>
     </q-select>
 
-    <q-btn color="primary" label="ثبت" />
+    <q-btn color="dark" label="ثبت" id="CityBtn" />
   </q-page>
 </template>
 
@@ -63,5 +63,13 @@ export default defineComponent({
   width: 50%;
   margin: 2em;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#CityBtn {
+  width: 25%;
+}
+#CityBtn:hover {
+  width: 30%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 300ms ease-in-out;
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
-  <ul class="card-wrapper">
-    <li class="card">
-      <img :src="post.imgLink" alt="" />
-      <h3>
-        <a href="">{{ post.title }}</a>
-      </h3>
-      <p>{{ post.discrib }}</p>
-    </li>
-  </ul>
+  <dir dir="rtl">
+    <ul class="card-wrapper">
+      <li class="card">
+        <img :src="post.imgLink" alt="" />
+        <h3>
+          <a href="">{{ post.title }}</a>
+        </h3>
+        <p>{{ post.discrib }}</p>
+      </li>
+    </ul>
+  </dir>
 </template>
 
 <script>
@@ -27,13 +29,14 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  --card-gradient: rgba(0, 0, 0, 0.8);
-  --card-gradient: #5e9ad9, #e271ad;
+  // --card-gradient: rgba(0, 0, 0, 0.8);
+  // --card-gradient: #5e9ad9, #e271ad;
   // --card-gradient: tomato, orange;
-  --card-blend-mode: overlay;
+  // --card-blend-mode: overlay;
   // --card-blend-mode: multiply;
+  font-family: "Dirooz";
 
-  background-color: #fff;
+  background-color: #f5f5f5;
   border-width: 1px;
   border: solid;
   border-color: rgba(0, 0, 0, 0.247);
@@ -81,10 +84,12 @@ export default {
 .card h3 {
   margin-top: 1rem;
   font-size: 1.25rem;
+  list-style: none;
 }
 
 .card a {
   color: inherit;
+  text-decoration: none;
 }
 
 .card-wrapper {

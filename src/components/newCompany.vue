@@ -5,7 +5,8 @@
         url="http://localhost:4444/upload"
         label="تصویر فروشگاه"
         multiple
-        style="max-width: 300px"
+        style="max-width: 100%"
+        color="dark"
       />
     </div>
 
@@ -123,7 +124,7 @@
       </template>
     </q-input>
 
-    <q-btn id="companyBtn" color="primary" label="ثبت تغییرات" />
+    <q-btn id="companyBtn" color="dark" label="ثبت تغییرات" />
   </div>
 </template>
 

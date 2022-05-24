@@ -61,10 +61,8 @@
     </div>
 
     <div class="OurInfo">
-      <q-card
-        class="my-card text-white"
-        style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-      >
+      <img src="../assets/pic04.png" alt="" />
+      <q-card class="my-card">
         <q-card-section>
           <div class="text-h6">اطلاعات تماس</div>
           <div class="text-subtitle2">تنظیمات موقتی</div>
@@ -139,10 +137,29 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400");
 
+.OurInfo {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20%;
+
+  @media screen and (max-width: 760px) {
+    margin-top: 0%;
+  }
+  img {
+    width: 50%;
+    height: auto;
+  }
+}
 .my-card {
   width: 100%;
   max-width: 70%;
-  margin-top: 5em;
+
+  background-color: #f4cf19;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .mainContactUsContainer {
@@ -154,9 +171,7 @@ export default defineComponent({
     grid-template-rows: 1fr 1fr;
   }
 }
-.OurInfo {
-  background-color: #e94b35;
-}
+
 .center {
   display: flex;
   justify-content: center;

@@ -1,13 +1,6 @@
 <template>
   <q-page dir="rtl" class="orderContainer">
-    <div><h4>لیست سفارشات</h4></div>
-    <div class="q-gutter-y-md tabsMessage">
-      <q-tabs v-model="tab" inline-label class="bg-purple text-white shadow-2">
-        <q-tab name="mails" icon="mail" label="پیام ها" />
-        <q-tab name="alarms" icon="alarm" label="در انتظار پاسخ" />
-        <q-tab name="movies" icon="movie" label="پاسخ داده شده" />
-      </q-tabs>
-    </div>
+    <div class="ordersTitle"><h4>لیست سفارشات</h4></div>
 
     <div class="q-pa-md">
       <q-table :rows="rows" :columns="columns" row-key="name" />
@@ -22,7 +15,7 @@ const columns = [
   {
     name: "name",
     required: true,
-    label: "Dessert (100g serving)",
+    label: "نام سفارش",
     align: "left",
     field: (row) => row.name,
     format: (val) => `${val}`,
@@ -31,28 +24,12 @@ const columns = [
   {
     name: "calories",
     align: "center",
-    label: "Calories",
+    label: "دسته بندی",
     field: "calories",
     sortable: true,
   },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  { name: "protein", label: "Protein (g)", field: "protein" },
-  { name: "sodium", label: "Sodium (mg)", field: "sodium" },
-  {
-    name: "calcium",
-    label: "Calcium (%)",
-    field: "calcium",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-  },
-  {
-    name: "iron",
-    label: "Iron (%)",
-    field: "iron",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-  },
+  { name: "fat", label: "قیمت", field: "fat", sortable: true },
+  { name: "carbs", label: "تاریخ", field: "carbs" },
 ];
 
 const rows = [
@@ -177,6 +154,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   margin: 0%;
+}
+.ordersTitle {
+  margin-right: 10%;
 }
 </style>

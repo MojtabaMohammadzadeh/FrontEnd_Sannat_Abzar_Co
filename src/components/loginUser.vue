@@ -1,6 +1,6 @@
 <template>
   <div id="loginMain">
-    <img class="logoLogin" src="../assets/Abzar-Sanat.png" alt="" />
+    <img class="logoLogin" src="../assets/Logo.png" alt="" />
 
     <h6>.به ابزار صنعت پارس خوش آمدید</h6>
     <p>.برای ورود یا ثبت نام، لطفا شماره موبایل خود را وارد نمایید</p>
@@ -30,7 +30,7 @@ export default {
   color: rgb(43, 43, 43);
 }
 .logoLogin {
-  width: 10%;
+  width: 20%;
   height: auto;
   margin-bottom: 1.5em;
 }

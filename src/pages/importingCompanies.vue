@@ -55,7 +55,7 @@ export default defineComponent({
 #addBtn {
   position: fixed;
   bottom: 5%;
-  right: 2%;
+  left: 2%;
   font-size: 25px;
 }
 #addBtn:hover {

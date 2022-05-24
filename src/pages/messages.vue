@@ -15,7 +15,7 @@
     </div>
 
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card bg-secondary text-white">
+      <q-card class="my-card bg-dark text-secondary">
         <q-card-section>
           <div class="text-h6">Our Changing Planet</div>
           <div class="text-subtitle2">by John Doe</div>
@@ -33,7 +33,7 @@
         </q-card-actions>
       </q-card>
 
-      <q-card class="my-card bg-secondary text-white">
+      <q-card class="my-card bg-dark text-secondary">
         <q-card-section>
           <div class="text-h6">Our Changing Planet</div>
           <div class="text-subtitle2">by John Doe</div>

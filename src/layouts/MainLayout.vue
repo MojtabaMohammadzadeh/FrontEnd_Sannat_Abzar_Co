@@ -1,64 +1,46 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar class="topToolbar">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <q-header elevated class="bg-primary text-dark">
+      <q-toolbar>
+        <q-toolbar-title class="topTitle">
+          <q-avatar>
+            <img src="../assets/Logo.png" />
+          </q-avatar>
+          صنعت ابزار
+        </q-toolbar-title>
 
-        <!-- ****************************Login Start******************************************* -->
-        <q-btn class="loginBtn" label="ورود" @click="prompt = true" />
-
-        <!-- *******************************Modal Start *********************************** -->
-        <q-dialog v-model="prompt" persistent>
-          <q-card class="modalCard">
-            <div>
-              <q-icon id="closeIcon" name="close" v-close-popup />
-            </div>
-            <div>
-              <loginUser></loginUser>
-            </div>
-          </q-card>
-        </q-dialog>
-        <!-- **************************************End Modal ************************* -->
-
-        <q-space />
-
-        <q-tabs v-model="tab" class="text-teal navBarContainer">
-          <q-tab>
-            <router-link class="navBar" to="/home">فروشگاه</router-link></q-tab
-          >
-          <q-tab
-            ><router-link class="navBar" to="/categories"
-              >دسته بندی
-            </router-link></q-tab
-          >
-          <q-tab>
-            <router-link class="navBar" to="/home"
-              >صفحه اصلی</router-link
-            ></q-tab
-          >
-        </q-tabs>
+        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
-      <!-- **********Search box********************* -->
-      <div>
-        <searchBar class="searchBar" />
-      </div>
+      <q-tabs class="navBarContainer" align="left">
+        <q-route-tab class="navBar" to="/home" label="صفحه اصلی" />
+        <q-route-tab class="navBar" to="/categories" label="دسته بندی" />
+        <q-route-tab class="navBar" to="/home" label="فروشگاه" />
+        <q-btn class="loginBtn" label="ورود" @click="prompt = true" />
+      </q-tabs>
     </q-header>
 
-    <q-drawer class="bg-blue-1" v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list class="qList">
-        <q-item-label class="logoContainer" header
-          ><img class="abzarLogo" src="../assets/Abzar-Sanat.png" alt=""
-        /></q-item-label>
+    <q-drawer
+      dir="rtl"
+      class="bg-secondary"
+      v-model="rightDrawerOpen"
+      side="right"
+      elevated
+    >
+      <!--************** Drawer Content *********************-->
 
+      <q-list class="qList">
         <ul class="navbarList">
+          <li>
+            <div
+              @click="(prompt = true), (rightDrawerOpen = false)"
+              class="login2"
+            >
+              <span class="material-icons"
+                ><q-icon name="login" size="2em" /></span
+              ><span class="drawerText">ورود</span>
+            </div>
+          </li>
           <li>
             <router-link to="/profile" class="myRouter"
               ><span class="material-icons"
@@ -132,41 +114,52 @@
         </ul>
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
+
+  <!-- *******************************Modal Start *********************************** -->
+  <q-dialog v-model="prompt" persistent>
+    <q-card class="modalCard">
+      <div>
+        <q-icon id="closeIcon" name="close" v-close-popup />
+      </div>
+      <div>
+        <loginUser></loginUser>
+      </div>
+    </q-card>
+  </q-dialog>
+  <!-- **************************************End Modal ************************* -->
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import searchBar from "components/searchBar.vue";
+
 import loginUser from "components/loginUser.vue";
 
 export default defineComponent({
   name: "MainLayout",
 
   components: {
-    searchBar,
     loginUser,
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
+    const rightDrawerOpen = ref(false);
 
     return {
       prompt: ref(false),
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
+      rightDrawerOpen,
+      toggleRightDrawer() {
+        rightDrawerOpen.value = !rightDrawerOpen.value;
       },
     };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   margin: 0%;
   padding: 0%;
@@ -213,24 +206,27 @@ export default defineComponent({
 
 .loginBtn {
   font-family: "Dirooz";
-  color: #cccdeb;
+  position: absolute;
+  right: 1em;
   min-width: 10%;
-  margin-left: 1em;
+  margin-left: 5%;
   padding-left: 1em;
   padding-right: 1em;
   border-radius: 5px;
-  background: linear-gradient(45deg, #4b5096, #a1a3c9);
-  box-shadow: 5px -5px 10px #bababa, -5px 5px 10px #e6f0f8;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 }
 .loginBtn:hover {
-  background: linear-gradient(60deg, #7479bd, #cccdeb);
+  background-color: #090217;
+  color: #f5f5f5;
 }
 
 q-icon {
   font-family: Arial, Helvetica, sans-serif;
 }
 .myRouter {
-  color: #041836;
+  color: #090217;
   text-decoration: none;
   font-size: 1em;
   font-family: "Dirooz";
@@ -241,8 +237,9 @@ q-icon {
 }
 
 .myRouter:hover {
-  color: #e0e0e0;
-  background-color: #041836;
+  background-color: #f4cf19;
+  transition: 0.25s ease-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 ul {
   margin-top: 2em;
@@ -252,29 +249,6 @@ li {
   list-style: none;
   position: relative;
   /* box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff; */
-}
-
-li:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #0087ca;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
-}
-li:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-li:hover {
-  background-color: #afaee6;
-  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
-
-  transition: transform 0.25s ease-out;
 }
 
 .searchBar {
@@ -287,6 +261,11 @@ li:hover {
   margin-right: 2em;
 }
 
+.topTitle {
+  font-family: "Dirooz";
+  margin-left: 1em;
+}
+
 .navBar {
   text-decoration-line: none;
   text-decoration-color: none;
@@ -294,6 +273,14 @@ li:hover {
   font-family: "Dirooz";
   margin-right: 1em;
   margin-left: 1em;
+  border-radius: 5px;
+}
+.navBar:hover {
+  background-color: #090217;
+  color: #f5f5f5;
+  padding: 2px;
+  border-radius: 5px;
+  transition: 200ms ease-out;
 }
 
 @media screen and (max-width: 480px) {
@@ -312,24 +299,32 @@ li:hover {
   margin-left: 30%;
   margin-top: 5%;
 }
+.login2 {
+  font-family: "Dirooz";
 
+  display: none;
+  cursor: pointer;
+  @media screen and (max-width: 760px) {
+    display: grid;
+    grid-template-columns: 20% 80%;
+  }
+}
+.login2:hover {
+  background-color: #f4cf19;
+  transition: 0.25s ease-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .exitBtn {
   font-family: "Dirooz";
 
   display: grid;
   grid-template-columns: 20% 80%;
   cursor: pointer;
-
-  padding-left: 35%;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  margin-top: 20%;
-  background: linear-gradient(315deg, #adb7cc, #f4f4f5);
-  box-shadow: 9px 9px 18px #bababa, -9px -9px 18px #ffffff;
 }
 .exitBtn:hover {
-  background: #e0e0e0;
-  box-shadow: inset -9px -9px 18px #bababa, inset 9px 9px 18px #ffffff;
+  background-color: #f4cf19;
+  transition: 0.25s ease-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .material-icons {

@@ -18,7 +18,7 @@
           round
           icon="add"
           class="QuantyBtn"
-        /><q-input outlined v-model="text" /><q-btn
+        /><q-input outlined v-model="text" class="inputQuantity" /><q-btn
           push
           color="primary"
           round
@@ -66,9 +66,7 @@ export default {
 
 .part03 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-content: center;
-  justify-items: center;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 .QuantyBtn {
   width: 1em;
@@ -76,5 +74,10 @@ export default {
 }
 #trashIcon {
   cursor: pointer;
+}
+.inputQuantity {
+  margin: 1em;
+  width: 30px;
+  height: 20px;
 }
 </style>
