@@ -14,18 +14,11 @@
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
       >
-        <q-carousel-slide :name="1" img-src="../imges/Banner01.jpg" />
         <q-carousel-slide
-          :name="2"
-          img-src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"
-        />
-        <q-carousel-slide
-          :name="3"
-          img-src="https://images.unsplash.com/photo-1567789884554-0b844b597180?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"
-        />
-        <q-carousel-slide
-          :name="4"
-          img-src="https://images.unsplash.com/photo-1647427060118-4911c9821b82?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"
+          v-for="(item, index) in slides"
+          :key="index"
+          :name="item.name"
+          :img-src="'https://www.abzarsaanat.ir/public/' + item.img"
         />
       </q-carousel>
     </div>
@@ -66,9 +59,9 @@
       <section class="cardContainer">
         <cardMaker
           class="cardMaker"
-          :key="post.id"
-          v-for="post in posts"
-          :post="post"
+          :key="brand.id"
+          v-for="brand in brands"
+          :post="brand"
         ></cardMaker>
       </section>
     </div>
@@ -78,6 +71,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import cardMaker from "../components/cardMaker.vue";
+import {api} from 'boot/axios'
+import FormData from "form-data";
 
 export default defineComponent({
   name: "IndexPage",
@@ -86,8 +81,36 @@ export default defineComponent({
   },
   data() {
     return {
-      posts: [],
+      brands: [],
+      slides : [] ,
     };
+  },
+  methods: {
+    getBrandsInfo() {
+      
+      var data = new FormData();
+      data.append('token', 'B49K61mY');
+      data.append('page_param', '1');
+      data.append('per_param', '10');
+
+      var config = {
+        method: 'post',
+        url: '/allbrandv2',
+        headers: {},
+        data : data
+      };
+
+      return api(config).then(response => {
+        this.slides = response.data.slider;
+        this.brands = response.data.brands;
+      }).catch(error => {
+        console.log(error);
+      });
+      
+    },
+  },
+  mounted() {
+    this.getBrandsInfo();
   },
   setup() {
     return {
@@ -95,67 +118,7 @@ export default defineComponent({
       autoplay: ref(true),
       tab: ref("mails"),
     };
-  },
-  created() {
-    this.posts = [
-      {
-        id: 1,
-        imgLink:
-          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032",
-        title: "تصویر اول",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 2,
-        imgLink:
-          "https://images.unsplash.com/photo-1540104539488-92a51bbc0410?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876",
-        title: "تصویر دوم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 3,
-        imgLink:
-          "https://images.unsplash.com/photo-1616321507403-9db926c914fd?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
-        title: "تصویر سوم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 4,
-        imgLink:
-          "https://images.unsplash.com/photo-1518709414768-a88981a4515d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387",
-        title: "تصویر چهارم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 5,
-        imgLink:
-          "https://images.unsplash.com/photo-1505798577917-a65157d3320a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
-        title: "تصویر پنجم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 1,
-        imgLink:
-          "https://images.unsplash.com/photo-1458829267686-b15150d4a28e?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
-        title: "تصویر ششم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 2,
-        imgLink:
-          "https://images.unsplash.com/photo-1540103711724-ebf833bde8d1?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876",
-        title: "تصویر هفتم",
-        discrib: "توضیحات تصویر",
-      },
-      {
-        id: 3,
-        imgLink:
-          "https://images.unsplash.com/photo-1567507145544-da3fe1b4f8f9?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
-        title: "تصویر هشتم",
-        discrib: "توضیحات تصویر",
-      },
-    ];
-  },
+  }
 });
 </script>
 

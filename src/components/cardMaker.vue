@@ -2,9 +2,9 @@
   <dir dir="rtl">
     <ul class="card-wrapper">
       <li class="card">
-        <img :src="post.imgLink" alt="" />
+        <img :src="'https://www.abzarsaanat.ir/public/' + post.img" alt="" />
         <h3>
-          <a href="">{{ post.title }}</a>
+          <a href="">{{ post.name }}</a>
         </h3>
         <p>{{ post.discrib }}</p>
       </li>

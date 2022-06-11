@@ -30,16 +30,23 @@
     <div class="picContainer">
       <img
         class="profilePic"
-        src="../assets/avatar-80d87a28af8cbd8218c96bf93e7c4579.jpg"
+        :src="'https://www.abzarsaanat.ir/public/' + image"
         alt=""
       />
       <q-icon id="profilePicIcon" name="photo_camera" />
     </div>
     <!-- ********************************INPUT ***************************** -->
     <div dir="rtl" class="form">
-      <h5>نام</h5>
-      <h5>نام خانوادگی</h5>
-      <h5>کد معرف</h5>
+      <label>نام : </label>
+      <span>{{ this.name }}</span>
+      <br />
+      <label>نام خانوادگی : </label>
+      <span>{{ this.family }}</span>
+      <br />
+      <label>شماره تماس : </label>
+      <span>{{ this.phone_number }}</span>
+      <br />
+
       <q-btn color="dark" label="تغییر مشخصات" @click="prompt = true" />
     </div>
 
@@ -50,14 +57,27 @@
     <!-- *********************************MOdal***************************** -->
     <q-dialog v-model="prompt" persistent>
       <q-card class="modalCard">
-        <div>
-          <q-icon id="closeIcon" name="close" v-close-popup />
-        </div>
-        <div dir="rtl" class="modalForm">
-          <input type="text" placeholder="نام" />
-          <input type="text" placeholder="نام خانوادگی" />
-          <q-btn class="modalBtn" color="dark" label="ثبت تغییرات" />
-        </div>
+        <form @submit="saveInfo">
+          <div>
+            <q-icon id="closeIcon" name="close" v-close-popup />
+          </div>
+          <div dir="rtl" class="modalForm">
+            <input type="text" v-model="name" placeholder="نام" />
+            <input type="text" v-model="family" placeholder="نام خانوادگی" />
+            <input
+              type="text"
+              v-model="phone_number"
+              placeholder="شماره تماس"
+            />
+            <q-btn
+              type="submit"
+              class="modalBtn"
+              color="dark"
+              label="ثبت تغییرات"
+              v-close-popup
+            />
+          </div>
+        </form>
       </q-card>
     </q-dialog>
 
@@ -67,9 +87,72 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { api } from "boot/axios";
+import FormData from "form-data";
 
 export default defineComponent({
   name: "userProfile",
+  data() {
+    return {
+      name: "",
+      family: "",
+      phone_number: "",
+      image: "",
+    };
+  },
+  methods: {
+    getInfo() {
+      var data = new FormData();
+      data.append("token", "j9En4rRP");
+      data.append("page_param", "1");
+      data.append("per_param", "10");
+
+      var config = {
+        method: "post",
+        url: "/userprofile",
+        headers: {},
+        data: data,
+      };
+
+      return api(config)
+        .then((response) => {
+          this.name = response.data.user_detail.name;
+          this.family = response.data.user_detail.family;
+          this.phone_number = response.data.user_detail.phone_number;
+          this.image = response.data.user_detail.img;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    saveInfo(e) {
+      e.preventDefault();
+      var data = new FormData();
+      data.append("token", "j9En4rRP");
+      data.append("name", this.name);
+      data.append("family", this.family);
+      data.append("phone_number", this.phone_number);
+
+      var config = {
+        method: "post",
+        url: "/updateuser",
+        headers: {},
+        data: data,
+      };
+
+      api(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          this.prompt.value = false;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.getInfo();
+  },
   setup() {
     return {
       prompt: ref(false),

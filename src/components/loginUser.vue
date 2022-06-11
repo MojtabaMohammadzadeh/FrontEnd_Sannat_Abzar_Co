@@ -59,7 +59,6 @@
                     try {
                         this.sendCode(this.login)
                             .then(response => {
-                                alert(JSON.stringify(response))
                                 if (response.success) {
                                     this.step = 'checkCode';
                                 }else{

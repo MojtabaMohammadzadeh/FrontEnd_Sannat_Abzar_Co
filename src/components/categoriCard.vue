@@ -4,7 +4,7 @@
       <li class="cards_item">
         <div class="card">
           <div class="card_image">
-            <img :src="category.imgLink" />
+            <img :src="'https://www.abzarsaanat.ir/public/' + category.img" />
           </div>
           <div dir="rtl" class="card_content">
             <h6 class="card_title">{{ category.title }}</h6>
@@ -26,8 +26,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.main {
-}
 h6 {
   font-family: "Dirooz";
 

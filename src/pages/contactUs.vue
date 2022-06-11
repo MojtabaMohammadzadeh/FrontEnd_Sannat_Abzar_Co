@@ -25,7 +25,7 @@
               name="phoneNumber"
               id="phoneNumber"
               required=""
-              v-model="phoneNumber"
+              v-model="phoneNumber.value"
             />
           </div>
           <div>
@@ -50,8 +50,6 @@
               v-model="message.text"
               :maxlength="message.maxlength"
             ></textarea>
-
-            >
           </div>
           <div>
             <input type="submit" value="ارسال" />
@@ -68,11 +66,7 @@
           <div class="text-subtitle2">تنظیمات موقتی</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation'
-        </q-card-section>
+        <q-card-section class="q-pt-none">{{this.institute_tell}}</q-card-section>
       </q-card>
     </div>
   </div>
@@ -80,6 +74,8 @@
 
 <script>
 import { defineComponent } from "@vue/composition-api";
+import { api } from "boot/axios";
+import FormData from "form-data";
 
 var emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -103,6 +99,7 @@ export default defineComponent({
         maxlength: 255,
       },
       submitted: false,
+      institute_tell: "",
     };
   },
   methods: {
@@ -124,12 +121,37 @@ export default defineComponent({
     checkAll: function (event) {
       this.selection.features = event.target.checked ? this.features : [];
     },
+    info() {
+      var data = new FormData();
+      data.append("token", "B49K61mY");
+      data.append("page_param", "1");
+      data.append("per_param", "10");
+
+      var config = {
+        method: "post",
+        url: "/firstpage",
+        headers: {},
+        data: data,
+      };
+
+      return api(config)
+        .then((response) => {
+          this.text = response.data.about_us;
+          this.institute_tell = response.data.institute_tell;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   watch: {
     // watching nested property
     "email.value": function (value) {
       this.validate("email", value);
     },
+  },
+  mounted() {
+    this.info();
   },
 });
 </script>
