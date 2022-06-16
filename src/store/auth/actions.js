@@ -2,10 +2,10 @@ import {api} from 'boot/axios'
 
 export const checkCode = async ({commit, dispatch}, payload) => {
   return api.post('/checkcode', payload).then(response => {
-    const token = response.token;
+    const token = response.data.token;
     commit('setToken', token);
     dispatch('getMe', token);
-    return response;
+    return response.data;
   })
 };
 
@@ -20,17 +20,18 @@ export const signOut = ({commit}) => {
 }
 
 export const getMe = async ({commit}, token) => {
-  await api.post('/userprofile', token.access).then(response => {
-    commit('setMe', response.data)
+  return await api.post('/userprofile', {"token" : token}).then(response => {
+    commit('setMe', response.data);
+    return response.data;
   })
 }
 
 export const init = async ({commit, dispatch}) => {
   const token = localStorage.getItem('token')
   if (token) {
-    await commit('setToken', JSON.parse(token))
-    api.defaults.headers.common.Authorization = 'JWT ' + JSON.parse(token).access
-    dispatch('getMe', JSON.parse(token))
+    await commit('setToken', token)
+    api.defaults.headers.common.Authorization = 'JWT ' + token
+    dispatch('getMe', token)
   } else {
     commit('removeToken')
   }

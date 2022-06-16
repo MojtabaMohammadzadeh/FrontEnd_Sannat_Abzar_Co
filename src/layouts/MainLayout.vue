@@ -16,7 +16,13 @@
         <q-route-tab class="navBar" to="/home" label="صفحه اصلی" />
         <q-route-tab class="navBar" to="/categories" label="دسته بندی" />
         <q-route-tab class="navBar" to="/home" label="فروشگاه" />
-        <q-btn class="loginBtn" label="ورود" @click="prompt = true" />
+        <q-btn
+          v-if="!this.user"
+          class="loginBtn"
+          label="ورود"
+          @click="prompt = true"
+        />
+         
       </q-tabs>
     </q-header>
 
@@ -104,7 +110,7 @@
               ><span class="drawerText">تغییر شهر</span></router-link
             >
           </li>
-          <li>
+          <li v-if="user" @click="logout">
             <div class="exitBtn">
               <span class="material-icons"
                 ><q-icon name="logout" size="2em" /></span
@@ -126,7 +132,7 @@
         <q-icon id="closeIcon" name="close" v-close-popup />
       </div>
       <div>
-        <loginUser></loginUser>
+        <loginUser :prompt="prompt"></loginUser>
       </div>
     </q-card>
   </q-dialog>
@@ -135,8 +141,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { mapActions } from "vuex";
 
 import loginUser from "components/loginUser.vue";
+
 
 export default defineComponent({
   name: "MainLayout",
@@ -155,6 +163,20 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
     };
+  },
+  computed: {
+    user() {
+      return this.getMe();
+    },
+  },
+  methods: {
+    ...mapActions("auth", ["signOut", "getMe"]),
+    logout() {
+      this.signOut();
+    },
+    getUser() {
+      return this.getMe();
+    },
   },
 });
 </script>
