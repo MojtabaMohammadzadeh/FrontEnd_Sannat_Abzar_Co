@@ -2,13 +2,13 @@
   <div class="main">
     <ul class="cards">
       <li class="cards_item">
-        <router-link :to="`/categoryPlaces/${category.id}`">
+        <router-link :to="`/category/${place.id}`">
           <div class="card">
-            <div class="card_image">
-              <img :src="'https://www.abzarsaanat.ir/public/' + category.img" />
+            <div dir="rtl" class="card_content">
+              <h6 class="card_title">{{ place.title }}</h6>
             </div>
             <div dir="rtl" class="card_content">
-              <h6 class="card_title">{{ category.title }}</h6>
+              <p class="card_title">{{ place.description }}</p>
             </div>
           </div>
         </router-link>
@@ -20,9 +20,9 @@
 <script>
 import { defineComponent } from "@vue/composition-api";
 export default defineComponent({
-  name: "categoryCard",
+  name: "categoryPlace",
   props: {
-    category: Object,
+    place: Object,
   },
 });
 </script>

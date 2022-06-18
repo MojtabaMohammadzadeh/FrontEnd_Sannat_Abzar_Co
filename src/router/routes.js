@@ -47,7 +47,17 @@ const routes = [
       },
       {
         path: "/brand/:id",
-        component: () => import("src/pages/brand.vue"),
+        component: () => import("src/pages/brandPage.vue"),
+        props: {}
+      },
+      {
+        path: "/categoryPlaces/:id",
+        component: () => import("src/pages/listPlacesCategory.vue"),
+        props: {}
+      },
+      {
+        path: "/category/:id",
+        component: () => import("src/pages/listPlacesCategory.vue"),
         props: {}
       },
     ],
