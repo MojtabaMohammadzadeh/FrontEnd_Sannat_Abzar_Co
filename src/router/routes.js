@@ -45,6 +45,11 @@ const routes = [
         path: "/shopingCart",
         component: () => import("src/pages/ShopingCart.vue"),
       },
+      {
+        path: "/brand/:id",
+        component: () => import("src/pages/brand.vue"),
+        props: {}
+      },
     ],
   },
 

@@ -2,11 +2,13 @@
   <dir dir="rtl">
     <ul class="card-wrapper">
       <li class="card">
-        <img :src="'https://www.abzarsaanat.ir/public/' + post.img" alt="" />
-        <h3>
-          <a href="">{{ post.name }}</a>
-        </h3>
-        <p>{{ post.discrib }}</p>
+        <router-link :to="`/brand/${post.id}`">
+          <img :src="'https://www.abzarsaanat.ir/public/' + post.img" alt="" />
+          <h3>
+            <span>{{ post.name }}</span>
+          </h3>
+          <p>{{ post.discrib }}</p>
+        </router-link>
       </li>
     </ul>
   </dir>
