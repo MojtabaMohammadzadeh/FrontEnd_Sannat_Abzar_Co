@@ -1,0 +1,23 @@
+// app global css in SCSS form
+
+@font-face {
+  font-family: mikhakMedium;
+  src: url(./fonts/Mikhak-Medium.ttf);
+}
+
+@font-face {
+  font-family: mikhakBlack;
+  src: url(./fonts/Mikhak-Black.ttf);
+}
+
+@font-face {
+  font-family: mikhakBold;
+  src: url(./fonts/Mikhak-Bold.ttf);
+}
+
+// declare a class which applies it
+.my-font {
+  font-family: "mikhakMedium";
+  font-family: "mikhakBlack";
+  font-family: "mikhakBold";
+}
