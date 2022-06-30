@@ -37,7 +37,7 @@
       >
         <div class="absolute-bottom bg-transparent DrawerLogo">
           <q-avatar size="56px" class="q-mb-sm">
-            <img class="logoOfDrawer" src="../assets/Logo.png" />
+            <img class="logoOfDrawer" src="../imges/logo.jpeg" />
           </q-avatar>
           <div class="text-weight-bold">صنعت ابزار</div>
           <div>همه ابزارها یک جا</div>

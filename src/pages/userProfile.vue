@@ -179,18 +179,11 @@ export default defineComponent({
 .form {
   width: 100%;
   padding: 5%;
-  color: #f5f5f5;
+  color: #212121;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 85, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
 
   @media screen and (max-width: 760px) {
     top: 15em;

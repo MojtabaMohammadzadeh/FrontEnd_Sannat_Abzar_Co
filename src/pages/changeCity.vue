@@ -9,7 +9,7 @@
       filled
       color="purple-12"
       v-model="model"
-      :options="options"
+      :options="allStates"
       label="استان"
     />
 
@@ -18,8 +18,8 @@
       class="selector"
       color="orange"
       filled
-      v-model="model"
-      :options="options"
+      v-model="city"
+      :options="allStates"
       label="شهرستان"
     >
       <template v-if="model" v-slot:append>
@@ -43,9 +43,42 @@ export default defineComponent({
 
   setup() {
     return {
+      city: ref("تهران"),
       model: ref("تهران"),
 
-      options: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      allStates: [
+        "آذربایجان شرقی",
+        "آذربایجان غربی",
+        "اردبیل",
+        "اصفهان",
+        "البرز",
+        "ایلام",
+        "بوشهر",
+        "تهران",
+        "چهارمحال بختیاری",
+        "خراسان جنوبی",
+        "خراسان رضوی",
+        "خراسان شمالی",
+        "خوزستان",
+        "زنجان",
+        "سمنان",
+        "سیستان و بلوچستان",
+        "فارس",
+        "قزوین",
+        "قم",
+        "کردستان",
+        "کرمان",
+        "کرمانشاه",
+        "کهگیلویه و بویراحمد",
+        "گلستان",
+        "گیلان",
+        "لرستان",
+        "مازندران",
+        "مرکزی",
+        "هرمزگان",
+        "همدان",
+        "یزد",
+      ],
     };
   },
 });

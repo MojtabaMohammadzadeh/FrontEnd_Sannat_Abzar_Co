@@ -14,7 +14,7 @@
       </q-tabs>
     </div>
 
-    <div class="q-pa-md row items-start q-gutter-md">
+    <div class="cartContainer">
       <q-card
         v-for="message in this.messages"
         :key="message.id"
@@ -25,15 +25,15 @@
           <div class="text-subtitle2">{{ message.created_at }}</div>
         </q-card-section>
 
-        <q-card-section>
+        <!-- <q-card-section>
           {{ message.content.replace(/[&]nbsp[;]/gi, " ") }}
-        </q-card-section>
+        </q-card-section> -->
 
         <q-separator dark />
 
-        <q-card-actions>
-          <q-btn color="green" flat>read</q-btn>
-          <q-btn color="red" flat>delete</q-btn>
+        <q-card-actions class="btns">
+          <q-btn id="readBtn" flat>خواندن</q-btn>
+          <q-btn id="deletBtn" flat>حذف</q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -101,5 +101,58 @@ export default defineComponent({
 
 .my-card {
   max-width: 30%;
+  max-height: 30%;
+  overflow: hidden;
+  margin: 16px;
+  @media screen and (max-width: 960px) {
+    max-width: 40%;
+  }
+  @media screen and (max-width: 760px) {
+    max-width: 80%;
+  }
+}
+.cartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#readBtn {
+  background-color: #212121;
+  color: #f5f5f5;
+  padding: 0em 2em;
+  margin: 1em;
+  border-radius: 8px;
+}
+#readBtn:hover {
+  background-color: #f5f5f5;
+  color: #212121;
+  transform: scale(1.1);
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transition: 200ms ease-in-out;
+}
+
+#deletBtn {
+  border: 2px solid #212121;
+  border-radius: 8px;
+}
+#deletBtn:hover {
+  background-color: #212121;
+  color: red;
+  border: none;
+  transform: scale(1.1);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transition: 100ms ease-in-out;
 }
 </style>

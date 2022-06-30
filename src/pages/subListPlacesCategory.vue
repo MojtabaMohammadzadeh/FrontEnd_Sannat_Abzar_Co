@@ -1,6 +1,6 @@
 <template>
   <q-page :style="' background: linear-gradient(to right, #a1ffce, #faffd1);'">
-    <section class="categoryContainer">
+    <section dir="rtl" class="categoryContainer">
       <subcategoryPlace
         class="subCategoryCard"
         :key="place.id"

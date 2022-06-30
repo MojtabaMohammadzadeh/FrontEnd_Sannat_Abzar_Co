@@ -25,10 +25,10 @@
     </q-carousel>
 
     <!-- *********************End Slider********************** -->
-    <section class="mainContainer">
+    <section class="mainContainer" dir="rtl">
       <div class="productContent">
         <h5>{{ places.title }}</h5>
-        <p>{{ places.description }}</p>
+        <span v-html="this.places?.description"></span>
       </div>
       <div class="address" dir="rtl">
         <div>
