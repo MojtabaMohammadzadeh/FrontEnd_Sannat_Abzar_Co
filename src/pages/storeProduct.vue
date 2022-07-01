@@ -70,7 +70,8 @@ export default defineComponent({
   methods: {
     getProductInfo() {
       var data = new FormData();
-      data.append("token", "B49K61mY");
+      const token = localStorage.getItem("token");
+      data.append("token", token);
       data.append("page_param", "1");
       data.append("per_param", "10");
       data.append("vip_product_id", this.id);

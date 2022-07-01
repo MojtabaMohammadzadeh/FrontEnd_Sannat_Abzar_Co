@@ -3,7 +3,7 @@ export function getMe (state) {
 }
 
 export function getToken (state) {
-  return state.token
+  return state.token;
 }
 export function isAuthenticated (state) {
   return state.isAuthenticated

@@ -78,7 +78,8 @@ export default defineComponent({
   methods: {
     getInfo() {
       var data = new FormData();
-      data.append("token", "j9En4rRP");
+      const token = localStorage.getItem("token");
+      data.append("token", token);
       data.append("page_param", "1");
       data.append("per_param", "10");
 

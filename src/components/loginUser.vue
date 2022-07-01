@@ -129,6 +129,7 @@ export default {
                   message: "شما با موفقیت وارد سیستم شدید.",
                 });
                 this.step = "";
+                this.$emit("close-modal");
               } else {
                 $q.notify({
                   type: "negative",

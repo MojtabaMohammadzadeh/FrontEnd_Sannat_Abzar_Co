@@ -126,7 +126,7 @@
                 ><span class="drawerText">تغییر شهر</span></router-link
               >
             </li>
-            <li v-if="isAuthenticated">
+            <li v-if="isAuthenticated" @click="this.logout">
               <div class="exitBtn">
                 <span class="material-icons"
                   ><q-icon name="logout" size="2em" /></span
@@ -200,6 +200,7 @@ export default defineComponent({
   },
   methods: {
     ...mapActions("auth", ["signOut", "getMe"]),
+    ...mapGetters("auth", ["getToken"]),
     logout() {
       this.signOut();
     },
@@ -210,7 +211,7 @@ export default defineComponent({
       this.prompt = false;
     },
     isAuthenticatedUser() {
-      return this.getUser();
+      return this.getToken();
     },
   },
 });

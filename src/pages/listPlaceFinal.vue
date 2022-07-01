@@ -48,6 +48,7 @@
           id="favoriteBtn"
           icon="favorite"
           glossy
+          @click="addToFavorite"
           label="افزودن به علاقه مندی ها"
         />
         <q-btn id="reportBtn" icon="report_problem" glossy label="گزارش تخلف" />
@@ -58,7 +59,9 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { useQuasar } from "quasar";
 import { api } from "boot/axios";
+let $q;
 export default defineComponent({
   name: "listPlaceFinal",
   data() {
@@ -73,9 +76,27 @@ export default defineComponent({
     },
   },
   methods: {
+    addToFavorite() {
+      api
+        .post("/submitfavorite", {
+          id_value: this.places.id,
+          type_fav: "place",
+          token: localStorage.getItem("token"),
+        })
+        .then((res) => {
+          $q.notify({
+            type: "success",
+            message: "با موفقیت به علاقه مندی ها اضافه شد",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getCategoryPlacesInfo() {
       var data = new FormData();
-      data.append("token", "Yd1Qd2Ql");
+      const token = localStorage.getItem("token");
+      data.append("token", token);
       data.append("page_param", "1");
       data.append("per_param", "10");
       data.append("id_place", this.id);
@@ -99,6 +120,7 @@ export default defineComponent({
   },
   mounted() {
     this.getCategoryPlacesInfo();
+    $q = useQuasar();
   },
   setup() {
     return {
